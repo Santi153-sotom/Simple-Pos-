@@ -13,6 +13,14 @@ A student POS account-management application built with CodeIgniter 4.
 - Placeholder image when no avatar is available
 - Five sample customer records and five sample user records
 - SQLite database migration, seeder, and SQL export
+- Session authentication with hashed passwords
+- Login protection for all customer and user management routes
+- Secure logout
+
+## Sample login
+
+- Username: `admin01`
+- Password: `Pos12345!`
 
 ## Run locally
 
@@ -37,6 +45,8 @@ Then open `http://localhost:8080`.
 | `/users` | List user accounts and avatars |
 | `/users/new` | Add a user |
 | `/users/edit/{id}` | Edit a user and upload an avatar |
+| `/login` | Sign in to the POS |
+| `/logout` | End the current session |
 
 ## Database export
 

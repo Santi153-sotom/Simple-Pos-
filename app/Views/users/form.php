@@ -31,6 +31,10 @@
             <?php endforeach ?>
         </select>
     </label>
+    <label>Password <?= $user === null ? '<span>*</span>' : '' ?>
+        <input type="password" name="password" minlength="8" maxlength="255" <?= $user === null ? 'required' : '' ?> autocomplete="new-password">
+        <small><?= $user === null ? 'Minimum 8 characters.' : 'Leave blank to keep the current password.' ?></small>
+    </label>
     <?php if ($user !== null): ?>
         <label>Profile Picture
             <input type="file" name="avatar" accept="image/jpeg,image/png">

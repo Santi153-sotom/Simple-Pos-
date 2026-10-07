@@ -21,6 +21,7 @@ class Users extends BaseController
             'username' => 'required|min_length[5]|max_length[50]|alpha_numeric_punct|is_unique[users.username]',
             'full_name' => 'required|max_length[100]',
             'role' => 'required|in_list[Administrator,Manager,Cashier,Inventory Staff]',
+            'password' => 'required|min_length[8]|max_length[255]',
         ];
 
         if ($this->request->is('post') && $this->validate($rules)) {
@@ -28,6 +29,7 @@ class Users extends BaseController
                 'username' => trim((string) $this->request->getPost('username')),
                 'full_name' => trim((string) $this->request->getPost('full_name')),
                 'role' => $this->request->getPost('role'),
+                'password' => password_hash((string) $this->request->getPost('password'), PASSWORD_DEFAULT),
             ]);
 
             return redirect()->to(site_url('users'))->with('success', 'User added successfully.');
@@ -56,6 +58,10 @@ class Users extends BaseController
         ];
 
         $avatar = $this->request->getFile('avatar');
+        $newPassword = (string) $this->request->getPost('password');
+        if ($newPassword !== '') {
+            $rules['password'] = 'min_length[8]|max_length[255]';
+        }
         if ($avatar !== null && $avatar->getError() !== UPLOAD_ERR_NO_FILE) {
             $rules['avatar'] = 'uploaded[avatar]|max_size[avatar,2048]|is_image[avatar]|mime_in[avatar,image/jpeg,image/png]|ext_in[avatar,jpg,jpeg,png]';
         }
@@ -66,6 +72,10 @@ class Users extends BaseController
                 'full_name' => trim((string) $this->request->getPost('full_name')),
                 'role' => $this->request->getPost('role'),
             ];
+
+            if ($newPassword !== '') {
+                $data['password'] = password_hash($newPassword, PASSWORD_DEFAULT);
+            }
 
             if ($avatar !== null && $avatar->isValid() && ! $avatar->hasMoved()) {
                 $extension = $avatar->getMimeType() === 'image/png' ? 'png' : 'jpg';

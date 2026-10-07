@@ -15,6 +15,7 @@ CREATE TABLE users (
     full_name VARCHAR(100) NOT NULL,
     role VARCHAR(50) NOT NULL,
     avatar VARCHAR(255),
+    password VARCHAR(255) NOT NULL,
     created_at DATETIME,
     updated_at DATETIME
 );
@@ -26,9 +27,10 @@ INSERT INTO customers (full_name, email, phone) VALUES
 ('Daniel Garcia', 'daniel.garcia@gmail.com', '0920-456-7804'),
 ('Ella Mendoza', 'ella.mendoza@gmail.com', '0921-567-8905');
 
-INSERT INTO users (username, full_name, role) VALUES
-('admin01', 'Alex Ramirez', 'Administrator'),
-('manager01', 'Bianca Flores', 'Manager'),
-('cashier01', 'Carlo Lim', 'Cashier'),
-('cashier02', 'Diana Aquino', 'Cashier'),
-('stock01', 'Enzo Villanueva', 'Inventory Staff');
+-- All sample users use the starter password Pos12345! (stored only as a hash).
+INSERT INTO users (username, full_name, role, password) VALUES
+('admin01', 'Alex Ramirez', 'Administrator', '$2b$12$gdYv/RueAQOuiVpDOn/OFuDnVrjwD3.fBL0L.Hv7pc6trZrPU6bMK'),
+('manager01', 'Bianca Flores', 'Manager', '$2b$12$gdYv/RueAQOuiVpDOn/OFuDnVrjwD3.fBL0L.Hv7pc6trZrPU6bMK'),
+('cashier01', 'Carlo Lim', 'Cashier', '$2b$12$gdYv/RueAQOuiVpDOn/OFuDnVrjwD3.fBL0L.Hv7pc6trZrPU6bMK'),
+('cashier02', 'Diana Aquino', 'Cashier', '$2b$12$gdYv/RueAQOuiVpDOn/OFuDnVrjwD3.fBL0L.Hv7pc6trZrPU6bMK'),
+('stock01', 'Enzo Villanueva', 'Inventory Staff', '$2b$12$gdYv/RueAQOuiVpDOn/OFuDnVrjwD3.fBL0L.Hv7pc6trZrPU6bMK');

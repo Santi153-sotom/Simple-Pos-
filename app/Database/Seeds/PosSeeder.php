@@ -19,12 +19,13 @@ class PosSeeder extends Seeder
         }
 
         if ($this->db->table('users')->countAllResults() === 0) {
+            $password = password_hash('Pos12345!', PASSWORD_DEFAULT);
             $this->db->table('users')->insertBatch([
-                ['username' => 'admin01', 'full_name' => 'Alex Ramirez', 'role' => 'Administrator'],
-                ['username' => 'manager01', 'full_name' => 'Bianca Flores', 'role' => 'Manager'],
-                ['username' => 'cashier01', 'full_name' => 'Carlo Lim', 'role' => 'Cashier'],
-                ['username' => 'cashier02', 'full_name' => 'Diana Aquino', 'role' => 'Cashier'],
-                ['username' => 'stock01', 'full_name' => 'Enzo Villanueva', 'role' => 'Inventory Staff'],
+                ['username' => 'admin01', 'full_name' => 'Alex Ramirez', 'role' => 'Administrator', 'password' => $password],
+                ['username' => 'manager01', 'full_name' => 'Bianca Flores', 'role' => 'Manager', 'password' => $password],
+                ['username' => 'cashier01', 'full_name' => 'Carlo Lim', 'role' => 'Cashier', 'password' => $password],
+                ['username' => 'cashier02', 'full_name' => 'Diana Aquino', 'role' => 'Cashier', 'password' => $password],
+                ['username' => 'stock01', 'full_name' => 'Enzo Villanueva', 'role' => 'Inventory Staff', 'password' => $password],
             ]);
         }
     }
